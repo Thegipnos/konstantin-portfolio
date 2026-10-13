@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Konstantin Prusakov</title>
+<meta name="description" content="Konstantin Prusakov — AI-креатор и автор музыки. Видеокреативы для брендов на нейросетях.">
+<style>
+@font-face{font-family:'Onest';src:url('fonts/Onest.ttf') format('truetype');font-style:normal;font-weight:100 900;font-display:swap}
+@font-face{font-family:'Oswald';src:url('fonts/Oswald.ttf') format('truetype');font-style:normal;font-weight:200 700;font-display:swap}
+@font-face{font-family:'Caveat';src:url('fonts/Caveat.ttf') format('truetype');font-style:normal;font-weight:400 700;font-display:swap}
+/* Layout: black stage, giant red word behind the portrait, then reel → cases → gallery → process → music → contact. Single dark look by choice. */
+:root{
+  --bg:#0A0A0A; --surface:#151515; --line:#242424; --fg:#F2EFEA; --muted:#B5B1AA; --dim:#8C8882;
+  --red:#C1121F; --red-text:#E5383B; --red-deep:#8E1117;
+  --display:'Onest', 'Segoe UI', system-ui, sans-serif;
+  --body:'Onest', 'Segoe UI', system-ui, sans-serif;
+  --script:'Onest', 'Segoe UI', system-ui, sans-serif;
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--fg)} a:hover{color:var(--red-text)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--red-text);outline-offset:3px}
+img,video{max-width:100%;display:block}
+.wrap{max-width:1360px;margin:0 auto;padding-inline:clamp(16px,3vw,32px)}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+.red{color:var(--red-text)}
+.h2{margin:0;font-family:var(--display);font-weight:700;text-transform:uppercase;line-height:.95;text-wrap:balance}
+.rule-head{display:flex;flex-wrap:wrap;align-items:center;gap:20px;margin-bottom:40px}
+.rule-head .line{flex:1;height:1px;background:var(--line)}
+.rule-head h2{font-size:clamp(24px,3vw,32px);min-width:0}
+.chip{display:inline-block;padding:8px 12px;border:1px solid #333;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:0 26px;background:var(--red);color:var(--fg);border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none}
+.btn:hover{background:var(--red-text);color:var(--fg)}
+section{border-bottom:1px solid var(--line)}
+.back-top{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:calc(20px + env(safe-area-inset-bottom));z-index:10;display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:12px 20px;background:var(--surface);border:1px solid var(--line);border-radius:999px;color:var(--fg);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.back-top[hidden]{display:none}
+.back-top:hover{border-color:var(--red-text);color:var(--red-text)}
+
+/* top bar */
+.top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;padding-block:22px;position:relative;z-index:3}
+.top nav{display:flex;flex-wrap:wrap;gap:20px;align-items:center}
+.top nav a{text-decoration:none}
+@media (max-width:700px){
+  .top{flex-direction:column;align-items:stretch;gap:20px;padding-block:24px}
+  .top nav{flex-direction:column;align-items:stretch;gap:0}
+  .top nav a{display:flex;align-items:center;min-height:48px;padding-block:14px;border-bottom:1px solid var(--line)}
+}
+
+/* hero */
+.hero{position:relative;overflow:hidden}
+.stage{position:relative;min-height:clamp(560px,52vw,740px);display:flex}
+.word{font-family:var(--display);font-weight:700;font-size:clamp(78px,16.5vw,250px);line-height:.86;color:var(--red);text-align:center;white-space:nowrap;position:relative;z-index:1;letter-spacing:-.01em}
+.portrait{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:min(540px,72%);aspect-ratio:3/4;object-fit:cover;object-position:center top;z-index:2}
+.hero-row{position:relative;z-index:3;flex:1;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px;padding-block:24px 48px}
+.intro,.stats{text-shadow:0 2px 18px rgba(0,0,0,.85)}
+@media (max-width:700px){
+  .stage{display:grid;min-height:0}
+  .portrait,.hero-row{grid-area:1/1}
+  .portrait{position:relative;left:auto;bottom:auto;transform:none;width:100%;align-self:start;-webkit-mask-image:linear-gradient(to bottom,#000 62%,transparent 100%);mask-image:linear-gradient(to bottom,#000 62%,transparent 100%)}
+  .hero-row{flex-direction:column;align-items:stretch;justify-content:flex-end;gap:24px;padding-top:62vw;padding-bottom:40px}
+  .intro{max-width:none}
+  .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));min-width:0;gap:12px}
+  .stat{flex-direction:column;align-items:flex-start;gap:6px;border-top:1px solid #3A3A3A}
+  .stat b{font-size:34px;min-width:0}
+  .stat span{font-size:10px}
+}
+.intro{max-width:360px}
+.hello{font-family:'Caveat', 'Brush Script MT', cursive;font-size:46px;line-height:1}
+.hero h1{margin:4px 0 0;font-family:'Oswald', 'Arial Narrow', Impact, sans-serif;font-weight:700;font-size:clamp(52px,6vw,92px);line-height:.92;text-transform:uppercase}
+.role{margin-top:16px;font-family:var(--display);font-weight:500;font-size:22px;line-height:1.15;text-transform:uppercase;color:var(--red-text)}
+.intro p{margin:14px 0 0;font-size:15px;color:var(--muted)}
+.stats{min-width:220px}
+.stat{display:flex;align-items:center;gap:16px;padding:14px 0;border-top:1px solid #2A2A2A}
+.stat b{font-family:var(--display);font-size:40px;color:var(--red-text);min-width:96px;font-variant-numeric:tabular-nums;font-weight:700}
+.stat span{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;line-height:1.4}
+.hero-shade{display:none}
+
+/* reel */
+.reel{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:56px;align-items:center;padding-block:72px}
+.reel video{width:min(400px,100%);aspect-ratio:9/16;object-fit:cover;border-radius:16px;border:1px solid #2A2A2A;background:var(--surface);margin-inline:auto}
+.reel p{color:var(--muted);max-width:460px}
+
+/* cases */
+.case{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:48px;align-items:start;padding-bottom:64px;margin-bottom:64px;border-bottom:1px solid var(--line)}
+.case:last-child{border-bottom:none;margin-bottom:0}
+.case figure{margin:0;display:grid;gap:14px}
+.case img{width:100%;object-fit:cover;border-radius:8px;border:1px solid #2A2A2A}
+.case-head{display:flex;align-items:baseline;gap:18px;margin-bottom:12px}
+.case-num{font-family:var(--display);font-weight:700;font-size:56px;color:var(--red-text);line-height:1}
+.case h3{margin:0;font-family:var(--display);font-weight:700;font-size:clamp(30px,3.4vw,40px);line-height:1;text-transform:uppercase}
+.case .type{margin-top:6px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.case-copy{min-width:0}
+.case-copy > p{margin:16px 0 28px;color:var(--muted);max-width:62ch}
+.steps{list-style:none;margin:0;padding:0;border-top:1px solid #2A2A2A}
+.steps li{display:grid;grid-template-columns:40px minmax(0,150px) minmax(0,1fr);gap:12px;padding:14px 0;border-bottom:1px solid #1E1E1E;align-items:baseline}
+.steps .n{font-family:var(--display);font-weight:700;color:var(--red-text)}
+.steps .t{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.steps .d{font-size:14px;color:var(--muted)}
+@media (max-width:520px){.steps li{grid-template-columns:32px minmax(0,1fr)}.steps .d{grid-column:2}}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(220px,100%),1fr));gap:16px}
+.gallery figure{margin:0;display:grid;gap:10px}
+.gallery img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:6px;border:1px solid #2A2A2A}
+.gallery figcaption{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+
+/* process trio */
+.trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))}
+.trio > div{padding:56px clamp(16px,3vw,32px)}
+.trio > div + div{border-left:1px solid var(--line)}
+.trio h2{font-size:30px;margin-bottom:32px}
+.exp{display:flex;justify-content:space-between;gap:16px;margin-bottom:18px}
+.exp b{display:block;font-size:15px}
+.exp small{display:block;font-size:13px;color:var(--dim);margin-top:4px}
+.exp em{font-style:normal;font-size:13px;color:var(--red-text);white-space:nowrap}
+.proc{list-style:none;margin:0;padding:0;display:grid;gap:22px}
+.proc li{display:flex;gap:16px;align-items:flex-start}
+.proc .n{font-family:var(--display);font-weight:700;font-size:18px;color:var(--red-text);min-width:26px;padding-top:10px}
+.ring{width:44px;height:44px;flex:none;border:1px solid var(--red-text);border-radius:999px;display:grid;place-items:center}
+.proc .t{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red-text)}
+.proc .d{font-size:14px;color:var(--muted);margin-top:4px}
+.quote{background:var(--red-deep);display:flex;flex-direction:column;gap:24px;min-height:420px}
+.quote p{margin:0;font-family:var(--display);font-weight:500;font-size:28px;line-height:1.3;text-transform:uppercase}
+.sign{font-family:var(--script);font-size:48px;line-height:1}
+@media (max-width:700px){.trio > div + div{border-left:none;border-top:1px solid var(--line)}}
+
+/* music */
+.music{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:56px;align-items:center;padding-block:72px}
+.music > img{width:100%;max-width:520px;aspect-ratio:1/1;object-fit:cover;border-radius:8px;border:1px solid #2A2A2A}
+.tracks{display:grid;gap:10px;max-width:520px;margin-top:24px}
+.track{padding:14px 18px;background:var(--surface);border:1px solid #2A2A2A;border-radius:10px;display:grid;gap:10px}
+.track-top{display:flex;gap:14px;align-items:baseline}
+.track-top .n{font-family:var(--display);font-weight:700;color:var(--red-text)}
+.track-top .t{flex:1;font-weight:600;min-width:0}
+.track-top .time{font-size:13px;color:var(--dim);font-variant-numeric:tabular-nums}
+.track audio{width:100%;height:40px}
+
+/* contact */
+.contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:48px;align-items:center;padding-block:72px}
+.contact p{color:var(--muted);max-width:380px;margin:20px 0 28px}
+.links{display:grid}
+.links > *{display:flex;align-items:center;gap:18px;padding:16px 0;border-bottom:1px solid var(--line);text-decoration:none;min-height:44px}
+.links .val{user-select:all}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-block:22px;font-size:13px;color:var(--dim)}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body style="margin:0">
+
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap top eyebrow">
+    <div><div class="red">AI-креатор</div><div>Видео и музыка</div></div>
+    <nav aria-label="Разделы">
+      <a href="#work">Проекты</a>
+      <a href="#reel">Шоурил</a>
+      <a href="#music">Музыка</a>
+      <a href="#contact">Открыт для проектов ✦</a>
+    </nav>
+  </div>
+  <div class="wrap stage">
+    <img class="portrait" src="media/portrait.jpg" alt="Константин Прусаков в солнцезащитных очках и чёрной рубашке с красным узором">
+    <div class="hero-row">
+      <div class="intro">
+        <div class="hello">Привет, я</div>
+        <h1>Konstantin<br>Prusakov</h1>
+        <div class="role">AI-креатор<br>и автор музыки</div>
+        <p>Создаю видеокреативы для брендов на нейросетях: от идеи и раскадровки до полного монтажа с собственной музыкой.</p>
+        <p class="eyebrow" style="color:var(--fg)">Работаю удалённо по всему миру</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>118</b><span>роликов<br>сдано</span></div>
+        <div class="stat"><b>42</b><span>клиента</span></div>
+        <div class="stat"><b>100</b><span>своих<br>треков</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REEL -->
+<section id="reel">
+  <div class="wrap reel">
+    <div>
+      <div class="eyebrow red" style="margin-bottom:16px">Showreel 2026</div>
+      <h2 class="h2" style="font-size:clamp(40px,5vw,72px);margin-bottom:20px">37 секунд<br>о том, что я умею</h2>
+      <p>Фэшн, бьюти, реклама и кинематографичные сцены: кадры из моих проектов, собранные в один ролик. Всё сгенерировано нейросетями и смонтировано мной.</p>
+      <div class="chips" style="margin-top:24px"><span class="chip">Фэшн</span><span class="chip">Бьюти</span><span class="chip">Реклама</span><span class="chip">Кино</span></div>
+    </div>
+    <video data-src="media/showreel.mp4" poster="media/showreel-poster.jpg" controls muted loop playsinline autoplay preload="metadata" aria-label="Шоурил Константина Прусакова"></video>
+  </div>
+</section>
+
+<!-- CASES -->
+<section id="work">
+  <div class="wrap" style="padding-block:64px">
+    <div class="rule-head"><h2 class="h2">Избранные проекты</h2><div class="line"></div><span class="eyebrow" style="color:var(--dim)">От идеи до монтажа</span></div>
+
+    <article class="case">
+      <figure>
+        <img src="media/chrysal.jpg" alt="Флорист наливает подкормку Chrysal Professional на фоне букетов" style="aspect-ratio:4/5">
+        <div class="chips"><span class="chip">Продукт</span><span class="chip">Генерация</span><span class="chip">Монтаж</span></div>
+      </figure>
+      <div class="case-copy">
+        <div class="case-head"><span class="case-num">01</span><div><h3>Chrysal</h3><div class="type">Видеокреатив · от идеи до монтажа</div></div></div>
+        <p>Видеокреатив для Chrysal — бренда средств для ухода за срезанными цветами. Показал профессиональную линейку в работе флориста: продукт в руках, свежие букеты и светлая мастерская. Полный цикл от идеи до монтажа.</p>
+        <ol class="steps">
+          <li><span class="n">01</span><span class="t">Идея</span><span class="d">Разобрал задачу бренда и придумал концепцию ролика под площадку и аудиторию.</span></li>
+          <li><span class="n">02</span><span class="t">Референсы</span><span class="d">Собрал мудборд: свет, цвет, настроение и ритм будущего видео.</span></li>
+          <li><span class="n">03</span><span class="t">Раскадровка</span><span class="d">Расписал сцены по кадрам, движение камеры и тайминг.</span></li>
+          <li><span class="n">04</span><span class="t">Генерация</span><span class="d">Создал кадры и видеосцены в нейросетях, удерживая единый стиль.</span></li>
+          <li><span class="n">05</span><span class="t">Монтаж</span><span class="d">Собрал ролик, выстроил ритм, сделал цветокоррекцию и титры.</span></li>
+          <li><span class="n">06</span><span class="t">Звук и сдача</span><span class="d">Подобрал звук, внёс правки клиента и сдал в нужных форматах.</span></li>
+        </ol>
+      </div>
+    </article>
+
+    <article class="case">
+      <figure>
+        <img src="media/skinlab.jpg" alt="Руки в белых перчатках держат набор 23 Skin Lab Global Set" style="aspect-ratio:3/4">
+        <div class="chips"><span class="chip">Бьюти</span><span class="chip">Продукт</span><span class="chip">Монтаж</span></div>
+      </figure>
+      <div class="case-copy">
+        <div class="case-head"><span class="case-num">02</span><div><h3>23 Skin Lab</h3><div class="type">Видеокреатив · от идеи до монтажа</div></div></div>
+        <p>Бьюти-креатив для 23 Skin Lab: премиальная подача набора Global Set. Белые перчатки, тёмный изумрудный фон и отражения подчёркивают, что это продукт, к которому прикасаются бережно.</p>
+        <ol class="steps">
+          <li><span class="n">01</span><span class="t">Идея</span><span class="d">Придумал образ «драгоценности»: набор подают как предмет роскоши.</span></li>
+          <li><span class="n">02</span><span class="t">Референсы</span><span class="d">Собрал мудборд люксовых бьюти-съёмок: свет, фактуры, палитра.</span></li>
+          <li><span class="n">03</span><span class="t">Сцена</span><span class="d">Выстроил композицию: перчатки, изумрудная плитка, отражения.</span></li>
+          <li><span class="n">04</span><span class="t">Генерация</span><span class="d">Сгенерировал кадры и движение с точной передачей упаковки.</span></li>
+          <li><span class="n">05</span><span class="t">Монтаж</span><span class="d">Смонтировал ролик, выровнял цвет и добавил текст бренда.</span></li>
+          <li><span class="n">06</span><span class="t">Звук и сдача</span><span class="d">Наложил звук, отработал правки и выгрузил финальные версии.</span></li>
+        </ol>
+      </div>
+    </article>
+
+    <article class="case">
+      <figure>
+        <img src="media/calendar.jpg" alt="Страница календаря 2027 с героиней в очках для Айкрафт Оптика" style="aspect-ratio:5/4">
+        <div class="chips"><span class="chip">Оптика</span><span class="chip">Персонаж</span><span class="chip">Видео</span></div>
+      </figure>
+      <div class="case-copy">
+        <div class="case-head"><span class="case-num">03</span><div><h3>Айкрафт Оптика</h3><div class="type">Креатив для оптики · от идеи до монтажа</div></div></div>
+        <p>Креатив для Айкрафт Оптика: серия кадров с одной героиней в очках для календаря 2027 и видео. Свет, призмы и блики на линзах показывают оправы как часть красоты.</p>
+        <ol class="steps">
+          <li><span class="n">01</span><span class="t">Идея</span><span class="d">Придумал концепцию «красота — это свет»: призмы и блики на линзах.</span></li>
+          <li><span class="n">02</span><span class="t">Референсы</span><span class="d">Собрал фэшн- и бьюти-референсы для единого стиля всей серии.</span></li>
+          <li><span class="n">03</span><span class="t">Персонаж</span><span class="d">Создал героиню и удержал её внешность и оправы во всех кадрах.</span></li>
+          <li><span class="n">04</span><span class="t">Генерация</span><span class="d">Сгенерировал серию изображений и видеосцены с бликами.</span></li>
+          <li><span class="n">05</span><span class="t">Вёрстка и монтаж</span><span class="d">Собрал страницы календаря и смонтировал промо-ролик.</span></li>
+          <li><span class="n">06</span><span class="t">Сдача</span><span class="d">Подготовил файлы к печати и видео для соцсетей.</span></li>
+        </ol>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="wrap" style="padding-block:64px">
+    <div class="rule-head"><h2 class="h2">Ещё работы</h2><div class="line"></div></div>
+    <div class="gallery">
+      <figure><img src="media/polo.jpg" alt="Мужчина в белом поло у окна" loading="lazy"><figcaption>Фэшн · кампания</figcaption></figure>
+      <figure><img src="media/coat-woman.jpg" alt="Портрет девушки в сером пальто" loading="lazy"><figcaption>Фэшн · портрет</figcaption></figure>
+      <figure><img src="media/coat-man.jpg" alt="Мужчина в коричневом пальто" loading="lazy"><figcaption>Фэшн · lookbook</figcaption></figure>
+      <figure><img src="media/triptych.jpg" alt="Серия кадров с призмами и дымом" loading="lazy"><figcaption>Бьюти · свет и призмы</figcaption></figure>
+      <figure><img src="media/sequins.jpg" alt="Сетка бьюти-портретов в пайетках" loading="lazy"><figcaption>Бьюти · серия</figcaption></figure>
+      <figure><img src="media/eyewear.jpg" alt="Кадры с очками и бликами" loading="lazy"><figcaption>Оптика · реклама</figcaption></figure>
+      <figure><img src="media/fire.jpg" alt="Кинематографичная сцена с горящим домом и лошадью" loading="lazy"><figcaption>Кино · сцена</figcaption></figure>
+      <figure><img src="media/kokoshnik.jpg" alt="Портрет в кокошнике с рунами" loading="lazy"><figcaption>Арт · славянский мистицизм</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE / PROCESS / QUOTE -->
+<section id="process">
+  <div class="wrap trio" style="padding-inline:0">
+    <div>
+      <h2 class="h2">Опыт и инструменты</h2>
+      <div class="eyebrow red" style="margin-bottom:16px">Опыт</div>
+      <div class="exp"><div><b>Видеопродакшн на нейросетях</b><small>Креативы для брендов, удалённо со студией во Вьетнаме</small></div><em>2 года</em></div>
+      <div class="exp"><div><b>Музыка</b><small>Песни, саундтреки, 100 своих треков</small></div><em>7 лет</em></div>
+      <div class="exp" style="margin-bottom:32px"><div><b>Театр</b><small>Знаю сцену, зрителя и эмоцию изнутри</small></div><em>с 2014</em></div>
+      <div class="eyebrow red" style="margin-bottom:16px">Инструменты</div>
+      <div class="chips"><span class="chip">Seedance</span><span class="chip">Kling</span><span class="chip">Higgsfield</span><span class="chip">Nano Banana</span><span class="chip">Midjourney</span><span class="chip">Suno</span><span class="chip">CapCut</span><span class="chip">Claude</span><span class="chip">Раскадровка</span><span class="chip">Сценарий</span></div>
+    </div>
+    <div>
+      <h2 class="h2">Как я работаю</h2>
+      <ol class="proc">
+        <li><span class="n">01</span><span class="ring"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></svg></span><div><div class="t">Бриф</div><div class="d">Разбираю задачу, аудиторию и площадку.</div></div></li>
+        <li><span class="n">02</span><span class="ring"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span><div><div class="t">Идея</div><div class="d">Концепция, референсы и мудборд.</div></div></li>
+        <li><span class="n">03</span><span class="ring"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 5h18v14H3zM3 10h18M9 5v14"/></svg></span><div><div class="t">Раскадровка</div><div class="d">Персонажи, сцены и движение камеры.</div></div></li>
+        <li><span class="n">04</span><span class="ring"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg></span><div><div class="t">Генерация</div><div class="d">Создаю кадры и собираю ролик.</div></div></li>
+        <li><span class="n">05</span><span class="ring"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span><div><div class="t">Музыка и сдача</div><div class="d">Пишу саундтрек, вношу правки, сдаю.</div></div></li>
+      </ol>
+    </div>
+    <div class="quote">
+      <svg width="48" height="40" viewBox="0 0 48 40" aria-hidden="true"><path d="M0 40V22C0 9 7 2 20 0l2 6C14 8 11 13 11 20h9v20zm26 0V22C26 9 33 2 46 0l2 6c-8 2-11 7-11 14h9v20z" fill="currentColor"/></svg>
+      <p>Нейросеть рисует кадр. Эмоцию в него вкладывает человек.</p>
+      <div class="sign">NPR</div>
+      <div class="eyebrow" style="margin-top:auto;line-height:1.6">Давай сделаем<br>что-то сильное вместе</div>
+    </div>
+  </div>
+</section>
+
+<!-- MUSIC -->
+<section id="music">
+  <div class="wrap music">
+    <img src="media/cover-pinkod.jpg" alt="Обложка трека «Пин-Код #» проекта FACELESS" loading="lazy">
+    <div>
+      <div class="eyebrow red" style="margin-bottom:16px">Моё отличие</div>
+      <h2 class="h2" style="font-size:clamp(40px,5vw,72px);margin-bottom:20px">Видео и музыка<br>от одного автора</h2>
+      <p style="color:var(--muted);max-width:480px;margin:0">7 лет пишу музыку и выпускаю её как NPR и под анонимным проектом FACELESS. К своим роликам создаю оригинальные саундтреки: без стоковой музыки и проблем с правами.</p>
+      <div class="tracks">
+        <div class="track"><div class="track-top"><span class="n">01</span><span class="t">FACELESS — Пин-Код #</span><span class="time">2:27</span></div><audio data-src="media/track1.mp4" controls preload="none" aria-label="FACELESS — Пин-Код #"></audio></div>
+        <div class="track"><div class="track-top"><span class="n">02</span><span class="t">NPR — Сын ветра</span><span class="time">2:23</span></div><audio data-src="media/track2.mp4" controls preload="none" aria-label="NPR — Сын ветра"></audio></div>
+        <div class="track"><div class="track-top"><span class="n">03</span><span class="t">NPR — Как мне жить без тебя</span><span class="time">3:08</span></div><audio data-src="media/track3.mp4" controls preload="none" aria-label="NPR — Как мне жить без тебя"></audio></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap contact">
+    <div>
+      <h2 class="h2" style="font-size:clamp(40px,4.5vw,64px);line-height:1">Давай<br>работать вместе</h2>
+      <p>Беру новые проекты: видеокреативы для брендов, клипы, промо событий и препродакшн для студий.</p>
+      <a class="btn" href="https://t.me/konstantin_pr">Написать в Telegram →</a>
+    </div>
+    <div class="links">
+      <a href="https://t.me/konstantin_pr"><span class="ring"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M22 3 2 11l7 2 2 7 4-5 5 4zM9 13l6-5"/></svg></span><span>Telegram: @konstantin_pr</span></a>
+      <div><span class="ring"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 5h18v14H3zM3 6l9 7 9-7"/></svg></span><span class="val">k.v.prusakov@gmail.com</span></div>
+      <a href="https://instagram.com/konstantinn_pr"><span class="ring"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/></svg></span><span>Instagram: @konstantinn_pr</span></a>
+      <div><span class="ring"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="9" r="2"/></svg></span><span>Москва · работаю удалённо</span></div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>© 2026 Konstantin Prusakov</span><span>AI-видео · музыка · препродакшн</span></div></footer>
+
+<a class="back-top" id="back-to-top" href="#top" aria-label="Вернуться наверх" hidden>Наверх <span aria-hidden="true">↑</span></a>
+
+<script>
+var backToTop = document.getElementById('back-to-top');
+function updateBackToTop() {
+  backToTop.hidden = window.scrollY <= 320;
+}
+window.addEventListener('scroll', updateBackToTop, { passive: true });
+updateBackToTop();
+
+// iPhone Safari needs byte-range responses to stream media; load each file whole and play it from memory instead.
+(function () {
+  function load(el) {
+    var src = el.getAttribute('data-src');
+    return fetch(src)
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.blob(); })
+      .then(function (b) { el.src = URL.createObjectURL(b); })
+      .catch(function () { el.src = src; });
+  }
+  var video = document.querySelector('video[data-src]');
+  var audios = Array.prototype.slice.call(document.querySelectorAll('audio[data-src]'));
+  var chain = video ? load(video).then(function () { var p = video.play && video.play(); if (p && p.catch) p.catch(function () {}); }) : Promise.resolve();
+  audios.forEach(function (a) { chain = chain.then(function () { return load(a); }); });
+})();
+</script>
+
+</body>
+</html>
